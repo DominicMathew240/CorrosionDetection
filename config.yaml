@@ -1,0 +1,17 @@
+credentials:
+  usernames:
+    demo@gmail.com:
+      email: jsmith@gmail.com
+      name: John Smith
+      password: $2b$12$LFaXwPDbJqX6/hinE9xGFOrJcldmSSvAolJrDQpVsv.KuvEywfpEu
+    user@gmail.com:
+      email: rbriggs@gmail.com
+      name: Rebecca Brigs
+      password: $2b$12$LFaXwPDbJqX6/hinE9xGFOrJcldmSSvAolJrDQpVsv.KuvEywfpEu
+cookie:
+  expiry_days: 0
+  key: abcdef 
+  name: solar_panel
+preauthorized:
+  emails:
+  - dominicmathew240@gmail.com
