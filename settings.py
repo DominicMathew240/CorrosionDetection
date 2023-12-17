@@ -42,7 +42,7 @@ VIDEOS_DICT = {
 
 # ML Model config
 MODEL_DIR = ROOT / 'weights'
-DETECTION_MODEL = MODEL_DIR / 'best1.pt'
+DETECTION_MODEL = MODEL_DIR / 'nodecomp1.pt'
 SEGMENTATION_MODEL = MODEL_DIR / 'pt'
 
 # Webcam
