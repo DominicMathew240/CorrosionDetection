@@ -108,7 +108,7 @@ elif st.session_state["authentication_status"]:
         # "Select Task", ['Detection', 'Segmentation'])
 
     confidence = float(st.sidebar.slider(
-        "Select Model Confidence", 0, 100, 0)) / 100
+        "Select Model Confidence", 0, 100, 30)) / 100
 
     # Selecting Detection Or Segmentation
     if model_type == 'Detection':
