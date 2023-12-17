@@ -26,8 +26,8 @@ SOURCES_LIST = [IMAGE, VIDEO]
 
 # Images config
 IMAGES_DIR = ROOT / 'images'
-DEFAULT_IMAGE = IMAGES_DIR / 'thermal_1.jpeg'
-DEFAULT_DETECT_IMAGE = IMAGES_DIR / 'thermal_2.jpg'
+DEFAULT_IMAGE = IMAGES_DIR / 'corrosion.jpg'
+DEFAULT_DETECT_IMAGE = IMAGES_DIR / 'result.jpg'
 
 # Videos config
 VIDEO_DIR = ROOT / 'videos'
