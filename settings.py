@@ -26,7 +26,7 @@ SOURCES_LIST = [IMAGE, VIDEO]
 
 # Images config
 IMAGES_DIR = ROOT / 'images'
-DEFAULT_IMAGE = IMAGES_DIR / 'corrosion.jpg'
+DEFAULT_IMAGE = IMAGES_DIR / 'corrosion3.jpg'
 DEFAULT_DETECT_IMAGE = IMAGES_DIR / 'result.jpg'
 
 # Videos config
