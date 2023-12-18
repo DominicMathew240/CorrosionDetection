@@ -6,17 +6,21 @@ from data import class_names
 
 # Function to display distribution of classes
 def display_class_distribution(predictions):
-    st.subheader('Class Distribution')
-
-    cls_list = predictions.tolist()
+    if len(predictions) == 0:
+        st.warning('Note: No data to display. Please lower the confidence threshold!')
+        return
+    else:
+        st.subheader('Class Distribution')
     
-    # Map class indices to class names
-    class_labels = [class_names[i] for i in cls_list]
-
-    # Create a pandas Series for class counts
-    class_counts = pd.Series(class_labels).value_counts()
-
-    st.bar_chart(class_counts)
+        cls_list = predictions.tolist()
+        
+        # Map class indices to class names
+        class_labels = [class_names[i] for i in cls_list]
+    
+        # Create a pandas Series for class counts
+        class_counts = pd.Series(class_labels).value_counts()
+    
+        st.bar_chart(class_counts)
 
 # Function to display confidence distribution
 def display_confidence_distribution(predictions):
