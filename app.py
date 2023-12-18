@@ -180,17 +180,22 @@ elif st.session_state["authentication_status"]:
 
             # call the class distribution function from analytics.py
             analytics.display_class_distribution(number)
-            # Create two columns
-            col3, col4 = st.columns(2)
 
-            # Display the outputs in the columns
-            with col3:
-                analytics.display_confidence_distribution(confidence)
-            with col4:
-                analytics.display_confidence_heatmap(confidence, number)
-
-            # Display the prediction summary
-            analytics.display_prediction_summary(number, confidence)
+            # Error handling for empty predictions
+            if len(number) <= 0:
+                print()
+            else:
+                # Create two columns
+                col3, col4 = st.columns(2)
+    
+                # Display the outputs in the columns
+                with col3:
+                    analytics.display_confidence_distribution(confidence)
+                with col4:
+                    analytics.display_confidence_heatmap(confidence, number)
+    
+                # Display the prediction summary
+                analytics.display_prediction_summary(number, confidence)
             
     elif source_radio == settings.VIDEO:
         helper.play_stored_video(confidence, model)
