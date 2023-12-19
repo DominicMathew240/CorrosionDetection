@@ -11,15 +11,15 @@ def display_class_distribution(predictions):
         return
     else:
         st.subheader('Class Distribution')
-    
+
         cls_list = predictions.tolist()
         
         # Map class indices to class names
         class_labels = [class_names[i] for i in cls_list]
-    
+
         # Create a pandas Series for class counts
         class_counts = pd.Series(class_labels).value_counts()
-    
+
         st.bar_chart(class_counts)
 
 # Function to display confidence distribution
@@ -84,10 +84,15 @@ def display_prediction_summary(number, confidence):
     else:
         average_confidence = 0
     # Display the class name and average confidence
-    class_name = class_names[int(number[0])]
+    # class_name = class_names[int(number[0])]
+    uniqueName = set(class_labels)
 
     # Use st.metric to display the class name
-    col1.metric(label="Class", value=class_name)  
+    i = 0
+    for class_name in uniqueName:
+        col1.metric(label="Class "+ str(i+1), value=class_name)
+        i += 1
+
     col2.metric(label="Avg Confidence", value=average_confidence)   
 
     col1, col2 = st.columns(2) 
@@ -98,4 +103,4 @@ def display_prediction_summary(number, confidence):
     col1.write(df['confidence'].describe())  # Display summary statistics for confidence
     
     # Display the prediction in a bar chart
-    col2.bar_chart(pd.DataFrame({'class': class_name, 'confidence': confidences}))
+    col2.bar_chart(pd.DataFrame({'class': class_labels, 'confidence': confidences}))
