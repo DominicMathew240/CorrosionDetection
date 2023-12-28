@@ -62,7 +62,6 @@ footer = f"""
 <div class="footer">
 <img src="data:image/png;base64,{node_comp_base64}" width="32%" class="footer-image"/>
 <img src="data:image/png;base64,{stratetics_base64}" width="32%" class="footer-image"/>
-# <img src="data:image/png;base64,{dronez_base64}" width="18%" class="footer-image"/>
 </div>
 """
 st.markdown(footer, unsafe_allow_html=True)
