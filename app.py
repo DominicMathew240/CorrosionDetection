@@ -27,7 +27,7 @@ st.set_page_config(
 # Image Logo Initialization
 node_comp = Image.open("logo/node-comp.png")
 stratetics = Image.open("logo/stratetics.png")
-dronez = Image.open("logo/dronez.png")
+# dronez = Image.open("logo/dronez.png")
 
 def get_image_base64(image):
     buffered = BytesIO()
@@ -37,7 +37,7 @@ def get_image_base64(image):
 
 node_comp_base64 = get_image_base64(node_comp)
 stratetics_base64 = get_image_base64(stratetics)
-dronez_base64 = get_image_base64(dronez)
+# dronez_base64 = get_image_base64(dronez)
 
 # Display images in the footer
 footer = f"""
@@ -62,7 +62,7 @@ footer = f"""
 <div class="footer">
 <img src="data:image/png;base64,{node_comp_base64}" width="32%" class="footer-image"/>
 <img src="data:image/png;base64,{stratetics_base64}" width="32%" class="footer-image"/>
-<img src="data:image/png;base64,{dronez_base64}" width="18%" class="footer-image"/>
+# <img src="data:image/png;base64,{dronez_base64}" width="18%" class="footer-image"/>
 </div>
 """
 st.markdown(footer, unsafe_allow_html=True)
