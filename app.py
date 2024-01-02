@@ -184,13 +184,21 @@ elif st.session_state["authentication_status"]:
                 confidence = r.boxes.conf
                 class_name = r.boxes.cls
 
-            # call the class distribution function from analytics.py
-            analytics.display_class_distribution(number)
-
             # Error handling for empty predictions
             if len(number) <= 0:
                 print()
             else:
+                # call the class distribution function from analytics.py
+                st.subheader("Result Findings:")
+    
+                # Create two columns
+                col5, col6 = st.columns(2)
+    
+                with col5:
+                    analytics.image_grid(res_plotted)
+                with col6:
+                    analytics.display_class_distribution(number)
+
                 # Create two columns
                 col3, col4 = st.columns(2)
 
