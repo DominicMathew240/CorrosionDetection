@@ -81,7 +81,14 @@ def display_prediction_summary(number, confidence):
     else:
         average_confidence = 0
     # Display the class name and average confidence
-    class_name = class_names[int(number[0])]
+    # class_name = class_names[int(number[0])]
+    uniqueName = set(class_labels)
+
+    # Use st.metric to display the class name
+    i = 0
+    for class_name in uniqueName:
+        col1.metric(label="Class "+ str(i+1), value=class_name)
+        i += 1
 
     col1, col2 = st.columns(2) 
 
