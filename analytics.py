@@ -93,7 +93,6 @@ def display_prediction_summary(number, confidence):
     col1, col2 = st.columns(2) 
 
     # Use st.metric to display the class name
-    col1.metric(label="Class", value=class_name)  
     col2.metric(label="Avg Confidence", value=average_confidence)   
 
     # Display the prediction in a table
