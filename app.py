@@ -15,7 +15,6 @@ import streamlit_authenticator as stauth
 import settings
 import helper
 import analytics
-import chatbot
 
 # Setting page layout
 st.set_page_config(
