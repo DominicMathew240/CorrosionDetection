@@ -158,9 +158,18 @@ elif st.session_state["authentication_status"]:
                 st.image(default_detected_image_path, caption='Detected Image',
                         use_column_width=True)
             else:
+                add_tracker = st.sidebar.radio("Add Tracker ID", ('Yes', 'No'))
                 if st.sidebar.button('Detect Objects'):
-                    #return res value so that can be used in global scope
-                    res = model.predict(uploaded_image,
+
+                    if add_tracker == 'Yes':
+                        # Use model.track if the user wants to add a tracker
+                        res = model.track(uploaded_image,
+                                        conf=confidence, 
+                                        show = True
+                                        )
+                    else:
+                        #return res value so that can be used in global scope
+                        res = model.predict(uploaded_image,
                                         conf=confidence
                                         )
                     boxes = res[0].boxes
