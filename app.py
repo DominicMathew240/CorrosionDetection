@@ -186,7 +186,7 @@ elif st.session_state["authentication_status"]:
 
             # Error handling for empty predictions
             if len(number) <= 0:
-                print()
+                st.warning("No objects detected in the image. Try changing the confidence threshold.")
             else:
                 # call the class distribution function from analytics.py
                 st.subheader("Result Findings:")
