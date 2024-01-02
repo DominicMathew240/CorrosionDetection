@@ -194,9 +194,6 @@ elif st.session_state["authentication_status"]:
 
                 # Display the descriptive analytics and bar chart
                 analytics.display_prediction_summary(number, confidence)
-
-                # Display the chatbot
-                chatbot.chatcompanion()
             
     elif source_radio == settings.VIDEO:
         helper.play_stored_video(confidence, model)
