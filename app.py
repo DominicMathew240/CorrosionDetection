@@ -10,6 +10,7 @@ from io import BytesIO
 # External packages
 import streamlit as st
 import streamlit_authenticator as stauth
+import numpy as np
 
 # Local Modules
 import settings
@@ -27,7 +28,7 @@ st.set_page_config(
 # Image Logo Initialization
 node_comp = Image.open("logo/node-comp.png")
 stratetics = Image.open("logo/stratetics.png")
-# dronez = Image.open("logo/dronez.png")
+dronez = Image.open("logo/dronez.png")
 
 def get_image_base64(image):
     buffered = BytesIO()
@@ -37,7 +38,7 @@ def get_image_base64(image):
 
 node_comp_base64 = get_image_base64(node_comp)
 stratetics_base64 = get_image_base64(stratetics)
-# dronez_base64 = get_image_base64(dronez)
+dronez_base64 = get_image_base64(dronez)
 
 # Display images in the footer
 footer = f"""
@@ -48,7 +49,6 @@ footer = f"""
     right: 0;
     float: right;
     top: 0;
-    height: 10%;
     width: 26%;
     border-radius: 0px 0px 0px 12px;
     text-align: center;
@@ -61,8 +61,9 @@ footer = f"""
 
 </style>
 <div class="footer">
-<img src="data:image/png;base64,{stratetics_base64}" width="32%" class="footer-image"/>
 <img src="data:image/png;base64,{node_comp_base64}" width="32%" class="footer-image"/>
+<img src="data:image/png;base64,{stratetics_base64}" width="32%" class="footer-image"/>
+<img src="data:image/png;base64,{dronez_base64}" width="18%" class="footer-image"/>
 </div>
 """
 st.markdown(footer, unsafe_allow_html=True)
@@ -108,7 +109,7 @@ elif st.session_state["authentication_status"]:
         # "Select Task", ['Detection', 'Segmentation'])
 
     confidence = float(st.sidebar.slider(
-        "Select Model Confidence", 0, 100, 30)) / 100
+        "Select Model Confidence", 0, 100, 10)) / 100
 
     # Selecting Detection Or Segmentation
     if model_type == 'Detection':
@@ -161,9 +162,18 @@ elif st.session_state["authentication_status"]:
                 st.image(default_detected_image_path, caption='Detected Image',
                         use_column_width=True)
             else:
+                add_tracker = st.sidebar.radio("Add Tracker ID", ('Yes', 'No'))
                 if st.sidebar.button('Detect Objects'):
-                    #return res value so that can be used in global scope
-                    res = model.predict(uploaded_image,
+
+                    if add_tracker == 'Yes':
+                        # Use model.track if the user wants to add a tracker
+                        res = model.track(uploaded_image,
+                                        conf=confidence, 
+                                        show = True
+                                        )
+                    else:
+                        #return res value so that can be used in global scope
+                        res = model.predict(uploaded_image,
                                         conf=confidence
                                         )
                     boxes = res[0].boxes
@@ -171,6 +181,8 @@ elif st.session_state["authentication_status"]:
                     # print(boxes)
                     st.image(res_plotted, caption='Detected Image',
                             use_column_width=True)
+                    
+                    # analytics.image_grid(res_plotted)
                         
         if res is not None:
             for r in res:
@@ -179,23 +191,27 @@ elif st.session_state["authentication_status"]:
                 class_name = r.boxes.cls
 
             # call the class distribution function from analytics.py
-            analytics.display_class_distribution(number)
+            st.subheader("Result Findings:")
 
-            # Error handling for empty predictions
-            if len(number) <= 0:
-                print()
-            else:
-                # Create two columns
-                col3, col4 = st.columns(2)
-    
-                # Display the outputs in the columns
-                with col3:
-                    analytics.display_confidence_distribution(confidence)
-                with col4:
-                    analytics.display_confidence_heatmap(confidence, number)
-    
-                # Display the prediction summary
-                analytics.display_prediction_summary(number, confidence)
+            # Create two columns
+            col5, col6 = st.columns(2)
+
+            with col5:
+                analytics.image_grid(res_plotted)
+            with col6:
+                analytics.display_class_distribution(number)
+
+            # Create two columns
+            col3, col4 = st.columns(2)
+
+            # Display the outputs in the columns
+            with col3:
+                analytics.display_confidence_distribution(confidence)
+            with col4:
+                analytics.display_confidence_heatmap(confidence, number)
+
+            # Display the prediction summary
+            analytics.display_prediction_summary(number, confidence)
             
     elif source_radio == settings.VIDEO:
         helper.play_stored_video(confidence, model)
